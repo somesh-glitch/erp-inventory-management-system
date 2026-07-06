@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up — ERP Inventory Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="auth-page">
+    <div class="auth-container">
+        <!-- Decorative background -->
+        <div class="auth-bg-decoration">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+            <div class="bg-circle bg-circle-3"></div>
+        </div>
+
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect width="40" height="40" rx="10" fill="url(#logo-grad2)" />
+                        <path d="M12 14h16v3H12zm0 5h16v3H12zm0 5h10v3H12z" fill="#fff" opacity="0.9" />
+                        <defs>
+                            <linearGradient id="logo-grad2" x1="0" y1="0" x2="40" y2="40">
+                                <stop stop-color="#0ea5e9" />
+                                <stop offset="1" stop-color="#6366f1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1>Create Account</h1>
+                <p>Get started with your ERP dashboard</p>
+            </div>
+
+            <form id="signupForm" autocomplete="off">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        <input type="text" id="signupUsername" placeholder="Choose a username" required minlength="3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupRole">Role</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                            <path d="M16 3.13a4 4 0 010 7.75" />
+                        </svg>
+                        <select id="signupRole"
+                            style="width: 100%; padding: 12px 30px 12px 44px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); background: rgba(255, 255, 255, 0.06); font-size: 0.95rem; color: #f1f5f9; cursor: pointer; outline: none;">
+                            <option value="3" style="background: #1e293b; color: #f1f5f9;">Employee</option>
+                            <option value="2" style="background: #1e293b; color: #f1f5f9;">Inventory Manager</option>
+                            <option value="1" style="background: #1e293b; color: #f1f5f9;">Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0110 0v4" />
+                        </svg>
+                        <input type="password" id="signupPassword" placeholder="Create a password" required
+                            minlength="8">
+                    </div>
+                    <!-- Password strength real-time feedbacks -->
+                    <div class="password-requirements" id="passwordRequirements"
+                        style="margin-top: 8px; font-size: 0.8rem; color: #94a3b8;">
+                        <span class="req-title" style="display: block; font-weight: 600; margin-bottom: 4px;">Password
+                            requirements:</span>
+                        <div class="req-item" id="req-length"
+                            style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; transition: color var(--transition);">
+                            <span class="indicator">✕</span> At least 8 characters
+                        </div>
+                        <div class="req-item" id="req-uppercase"
+                            style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; transition: color var(--transition);">
+                            <span class="indicator">✕</span> 1 uppercase letter
+                        </div>
+                        <div class="req-item" id="req-lowercase"
+                            style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; transition: color var(--transition);">
+                            <span class="indicator">✕</span> 1 lowercase letter
+                        </div>
+                        <div class="req-item" id="req-num"
+                            style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; transition: color var(--transition);">
+                            <span class="indicator">✕</span> 1 number
+                        </div>
+                        <div class="req-item" id="req-special"
+                            style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px; transition: color var(--transition);">
+                            <span class="indicator">✕</span> 1 special character
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirm">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0110 0v4" />
+                            <circle cx="12" cy="16" r="1" />
+                        </svg>
+                        <input type="password" id="signupConfirm" placeholder="Confirm your password" required
+                            minlength="8">
+                    </div>
+                </div>
+                <div id="signupError" class="form-error" style="display:none;"></div>
+                <div id="signupSuccess" class="form-success" style="display:none;"></div>
+                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Redirect if already logged in
+        redirectIfLoggedIn();
+
+        // Target password checking
+        const passwordInput = document.getElementById('signupPassword');
+        const reqs = {
+            length: { el: document.getElementById('req-length'), test: s => s.length >= 8 },
+            uppercase: { el: document.getElementById('req-uppercase'), test: s => /[A-Z]/.test(s) },
+            lowercase: { el: document.getElementById('req-lowercase'), test: s => /[a-z]/.test(s) },
+            num: { el: document.getElementById('req-num'), test: s => /[0-9]/.test(s) },
+            special: { el: document.getElementById('req-special'), test: s => /[^A-Za-z0-9]/.test(s) }
+        };
+
+        passwordInput.addEventListener('input', function () {
+            const val = passwordInput.value;
+            for (const key in reqs) {
+                const req = reqs[key];
+                const isValid = req.test(val);
+                const indicator = req.el.querySelector('.indicator');
+                if (isValid) {
+                    req.el.style.color = '#10b981'; // Green
+                    indicator.textContent = '✓';
+                } else {
+                    req.el.style.color = '#94a3b8'; // Standard muted
+                    indicator.textContent = '✕';
+                }
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const username = document.getElementById('signupUsername').value;
+            const password = passwordInput.value;
+            const confirm = document.getElementById('signupConfirm').value;
+            const roleId = document.getElementById('signupRole').value;
+            const errorEl = document.getElementById('signupError');
+            const successEl = document.getElementById('signupSuccess');
+
+            errorEl.style.display = 'none';
+            successEl.style.display = 'none';
+
+            if (password !== confirm) {
+                errorEl.textContent = 'Passwords do not match.';
+                errorEl.style.display = 'block';
+                errorEl.classList.remove('shake');
+                void errorEl.offsetWidth;
+                errorEl.classList.add('shake');
+                return;
+            }
+
+            const result = await signup(username, password, roleId);
+            if (result.success) {
+                successEl.textContent = result.message + ' Redirecting to login…';
+                successEl.style.display = 'block';
+                setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+            } else {
+                errorEl.textContent = result.message;
+                errorEl.style.display = 'block';
+                errorEl.classList.remove('shake');
+                void errorEl.offsetWidth;
+                errorEl.classList.add('shake');
+            }
+        });
+    </script>
+</body>
+
+</html>

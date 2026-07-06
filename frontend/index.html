@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — ERP Inventory Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="10" fill="url(#sg)" />
+                    <path d="M12 14h16v3H12zm0 5h16v3H12zm0 5h10v3H12z" fill="#fff" opacity="0.9" />
+                    <defs>
+                        <linearGradient id="sg" x1="0" y1="0" x2="40" y2="40">
+                            <stop stop-color="#0ea5e9" />
+                            <stop offset="1" stop-color="#6366f1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="sidebar-title">ERP Manager</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-section="dashboard" id="navDashboard">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                </svg>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-item" data-section="inventory" id="navInventory">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                </svg>
+                <span>Inventory</span>
+            </button>
+            <button class="nav-item" data-section="reorder" id="navReorder">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 4v6h6" />
+                    <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
+                </svg>
+                <span>Reorder Alerts</span>
+            </button>
+            <button class="nav-item" data-section="predictor" id="navPredictor">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                    <polyline points="7.5 4.21 12 6.81 16.5 4.21" />
+                    <polyline points="7.5 19.79 7.5 14.6 3 12" />
+                    <polyline points="21 12 16.5 14.6 16.5 19.79" />
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                </svg>
+                <span style="display: flex; align-items: center; gap: 6px;">
+                    AI Predictor
+                    <span class="badge-new"
+                        style="background: var(--accent-gradient); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; font-weight: 700; text-transform: uppercase;">AI</span>
+                </span>
+            </button>
+            <button class="nav-item" data-section="reports" id="navReports">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                </svg>
+                <span>Reports</span>
+            </button>
+            <button class="nav-item" data-section="history" id="navHistory">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span>Order History</span>
+            </button>
+            <button class="nav-item" data-section="catalog" id="navCatalog">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <line x1="14" y1="17" x2="21" y2="17" />
+                    <line x1="17.5" y1="14" x2="17.5" y2="21" />
+                </svg>
+                <span>Catalog Manager</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <span class="user-name" id="userName">User</span>
+            </div>
+            <button class="nav-item logout-btn" id="logoutBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header" id="mobileHeader">
+        <button class="hamburger" id="hamburgerBtn">
+            <span></span><span></span><span></span>
+        </button>
+        <span class="mobile-title">ERP Manager</span>
+    </header>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+
+        <!-- =================== DASHBOARD SECTION =================== -->
+        <section class="content-section active" id="sectionDashboard">
+            <div class="section-header">
+                <div>
+                    <h2>Dashboard</h2>
+                    <p class="section-subtitle">Welcome back, <span id="dashGreetUser">User</span></p>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Widget 1: Reports Summary -->
+                <div class="dashboard-widget widget-reports">
+                    <div class="widget-header">
+                        <div class="widget-icon widget-icon-blue">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                        </div>
+                        <h3 class="widget-title">Reports Summary</h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-stats-grid">
+                            <div class="widget-stat">
+                                <span class="widget-stat-num" id="dashTotalOrders">0</span>
+                                <span class="widget-stat-label">Total Orders</span>
+                            </div>
+                            <div class="widget-stat">
+                                <span class="widget-stat-num" id="dashTotalPlanned">₹0</span>
+                                <span class="widget-stat-label">Planned Cost</span>
+                            </div>
+                            <div class="widget-stat">
+                                <span class="widget-stat-num" id="dashTotalActual">₹0</span>
+                                <span class="widget-stat-label">Actual Cost</span>
+                            </div>
+                            <div class="widget-stat">
+                                <span class="widget-stat-num" id="dashVariance">₹0</span>
+                                <span class="widget-stat-label">Variance</span>
+                            </div>
+                        </div>
+                        <div class="widget-status-row" id="dashProfitLoss">
+                            <span class="widget-badge widget-badge-neutral">No orders yet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget 2: Current Products -->
+                <div class="dashboard-widget widget-products">
+                    <div class="widget-header">
+                        <div class="widget-icon widget-icon-green">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                <line x1="12" y1="22.08" x2="12" y2="12" />
+                            </svg>
+                        </div>
+                        <h3 class="widget-title">Current Products</h3>
+                        <span class="widget-count-badge" id="dashProductCount">0</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-empty" id="dashNoProducts">
+                            <p>No active order. Start one from the Inventory page.</p>
+                        </div>
+                        <div class="widget-mini-table-wrap" id="dashProductsTable" style="display:none;">
+                            <table class="widget-mini-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Planned</th>
+                                        <th>Actual</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dashProductsBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget 3: Emergency Reorder Alerts -->
+                <div class="dashboard-widget widget-alerts">
+                    <div class="widget-header">
+                        <div class="widget-icon widget-icon-red">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                                <line x1="12" y1="9" x2="12" y2="13" />
+                                <line x1="12" y1="17" x2="12.01" y2="17" />
+                            </svg>
+                        </div>
+                        <h3 class="widget-title">Reorder Alerts</h3>
+                        <span class="widget-count-badge widget-count-danger" id="dashAlertCount">0</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-empty" id="dashNoAlerts">
+                            <p>No emergency reorder alerts.</p>
+                        </div>
+                        <div class="widget-mini-table-wrap" id="dashAlertsTable" style="display:none;">
+                            <table class="widget-mini-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Stock</th>
+                                        <th>Reorder Lvl</th>
+                                        <th>Qty Needed</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dashAlertsBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== INVENTORY SECTION =================== -->
+        <section class="content-section" id="sectionInventory">
+            <div class="section-header">
+                <div>
+                    <h2>Inventory</h2>
+                    <p class="section-subtitle">Manage products for your current order</p>
+                </div>
+                <button class="btn btn-primary" id="startOrderBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Start New Order
+                </button>
+            </div>
+
+            <!-- No active order state -->
+            <div class="empty-state" id="noOrderState">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    opacity="0.3">
+                    <path
+                        d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                </svg>
+                <h3>No Active Order</h3>
+                <p>Click "Start New Order" to begin adding products.</p>
+            </div>
+
+            <!-- Active order — product form + table -->
+            <div id="activeOrderArea" style="display:none;">
+                <div class="card product-form-card">
+                    <h3 class="card-title">Add Product</h3>
+                    <form id="productForm" autocomplete="off">
+                        <!-- Cost Planning Row -->
+                        <div class="form-section-label">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                            </svg>
+                            Cost Planning
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group fg-wide">
+                                <label for="prodName">Product Name</label>
+                                <input type="text" id="prodName" placeholder="e.g. Steel Rod" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="plannedQty">Planned Qty</label>
+                                <input type="number" id="plannedQty" placeholder="0" min="0" step="any" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="plannedRate">Planned Rate (₹)</label>
+                                <input type="number" id="plannedRate" placeholder="0.00" min="0" step="any" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="actualQty">Actual Qty</label>
+                                <input type="number" id="actualQty" placeholder="0" min="0" step="any" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="actualRate">Actual Rate (₹)</label>
+                                <input type="number" id="actualRate" placeholder="0.00" min="0" step="any" required>
+                            </div>
+                        </div>
+
+                        <!-- Reorder / Inventory Control Row -->
+                        <div class="form-section-label reorder-label">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 4v6h6" />
+                                <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
+                            </svg>
+                            Inventory Control
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="currentStock">Current Stock</label>
+                                <input type="number" id="currentStock" placeholder="0" min="0" step="any" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="minStock">Minimum Stock</label>
+                                <input type="number" id="minStock" placeholder="0" min="0" step="any" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dailyConsumption">Avg Daily Usage</label>
+                                <input type="number" id="dailyConsumption" placeholder="0" min="0" step="any" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="leadTime">Lead Time (days)</label>
+                                <input type="number" id="leadTime" placeholder="0" min="0" step="any" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="safetyStock">Safety Stock</label>
+                                <input type="number" id="safetyStock" placeholder="0" min="0" step="any" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            Add Product
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card" id="inventoryTableCard" style="display:none;">
+                    <h3 class="card-title">Products in Current Order</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="inventoryTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Planned Cost</th>
+                                    <th>Actual Cost</th>
+                                    <th>Reorder Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== REORDER ALERTS SECTION =================== -->
+        <section class="content-section" id="sectionReorder">
+            <div class="section-header">
+                <div>
+                    <h2>Reorder Alerts</h2>
+                    <p class="section-subtitle">Inventory reorder predictions for current order</p>
+                </div>
+            </div>
+
+            <div class="empty-state" id="noReorderState">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    opacity="0.3">
+                    <path d="M1 4v6h6" />
+                    <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
+                </svg>
+                <h3>No Reorder Data</h3>
+                <p>Add products from the Inventory page to see reorder alerts.</p>
+            </div>
+
+            <div id="reorderAlertArea" style="display:none;">
+                <!-- Summary cards -->
+                <div class="reorder-summary-row" id="reorderSummaryRow">
+                    <div class="reorder-stat-card reorder-danger">
+                        <div class="reorder-stat-num" id="reorderRequiredCount">0</div>
+                        <div class="reorder-stat-label">Reorder Required</div>
+                    </div>
+                    <div class="reorder-stat-card reorder-ok">
+                        <div class="reorder-stat-num" id="stockOkCount">0</div>
+                        <div class="reorder-stat-label">Stock Sufficient</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Product Reorder Analysis</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="reorderTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Current Stock</th>
+                                    <th>Reorder Level</th>
+                                    <th>Reorder Qty</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reorderBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== REPORTS SECTION =================== -->
+        <section class="content-section" id="sectionReports">
+            <div class="section-header">
+                <div>
+                    <h2>Reports</h2>
+                    <p class="section-subtitle">Complete your order and view the summary</p>
+                </div>
+            </div>
+
+            <!-- No active order to report -->
+            <div class="empty-state" id="noReportState">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    opacity="0.3">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                </svg>
+                <h3>No Active Order</h3>
+                <p>Start an order from the Inventory page first.</p>
+            </div>
+
+            <!-- Active order — complete button + summary -->
+            <div id="reportActiveArea" style="display:none;">
+                <div class="card" id="reportPendingCard">
+                    <div class="report-pending">
+                        <h3>Order Ready to Complete</h3>
+                        <p id="reportProductCount">0 products in current order</p>
+                        <button class="btn btn-success" id="completeOrderBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            Complete Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order summary after completion -->
+            <div id="reportSummaryArea" style="display:none;">
+                <div class="card report-summary-card">
+                    <div class="report-summary-header">
+                        <h3>Order Summary</h3>
+                        <span class="order-id-badge" id="reportOrderId">ORD-0001</span>
+                    </div>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="summary-label">Total Planned Cost</span>
+                            <span class="summary-value planned" id="reportPlannedCost">₹0.00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Total Actual Cost</span>
+                            <span class="summary-value actual" id="reportActualCost">₹0.00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Variance</span>
+                            <span class="summary-value variance" id="reportVariance">₹0.00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Status</span>
+                            <span class="summary-value status" id="reportStatus">—</span>
+                        </div>
+                    </div>
+
+                    <!-- Cost breakdown table -->
+                    <h4 class="sub-card-title">Cost Breakdown</h4>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="reportTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Planned Cost</th>
+                                    <th>Actual Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportBody"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Reorder status table -->
+                    <h4 class="sub-card-title" style="margin-top:28px;">Reorder Status</h4>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="reportReorderTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Current Stock</th>
+                                    <th>Reorder Level</th>
+                                    <th>Reorder Qty</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportReorderBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="report-actions">
+                        <button class="btn btn-primary" id="exportPdfBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Export PDF
+                        </button>
+                        <button class="btn btn-outline" id="newOrderFromReportBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            New Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== AI DEMAND PREDICTOR SECTION =================== -->
+        <section class="content-section" id="sectionPredictor">
+            <div class="section-header">
+                <div>
+                    <h2>AI Demand Predictor</h2>
+                    <p class="section-subtitle">Predict demand and optimize safety stock thresholds to avoid inventory
+                        crisis</p>
+                </div>
+            </div>
+
+            <!-- No products state -->
+            <div class="empty-state" id="noPredictorState">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    opacity="0.3">
+                    <path
+                        d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                </svg>
+                <h3>No Product Data to Analyze</h3>
+                <p>Add products to your active order from the Inventory page first.</p>
+            </div>
+
+            <!-- Active Predictor Workspace -->
+            <div id="predictorArea" style="display:none;">
+                <div class="predictor-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <!-- Controls Card -->
+                    <div class="card predictor-card">
+                        <h3 class="card-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                            </svg>
+                            Prediction Controls
+                        </h3>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="predictorProductSelect"
+                                style="font-weight:600; text-transform:uppercase; font-size:0.75rem; color:var(--text-secondary); margin-bottom:6px; display:block;">Select
+                                Product</label>
+                            <select id="predictorProductSelect"
+                                style="width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-card); font-size: 0.95rem; color: var(--text-primary); cursor: pointer; outline: none;"></select>
+                        </div>
+
+                        <!-- Param 1: Market Shift Slider -->
+                        <div class="slider-wrapper" style="margin-bottom: 24px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <label
+                                    style="font-weight:600; text-transform:uppercase; font-size:0.75rem; color:var(--text-secondary);">Demand
+                                    Trend Shift (%)</label>
+                                <span id="trendShiftVal" style="font-weight:700; color:var(--accent);">0%</span>
+                            </div>
+                            <input type="range" id="trendShiftSlider" min="-50" max="150" value="0" step="5" />
+                            <small
+                                style="color: var(--text-secondary); font-size:0.76rem; display:block; margin-top:4px;">Positive
+                                flags reflect rising demand spikes (e.g. seasonal factors).</small>
+                        </div>
+
+                        <!-- Param 2: Target Safety Margin -->
+                        <div class="slider-wrapper" style="margin-bottom: 24px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <label
+                                    style="font-weight:600; text-transform:uppercase; font-size:0.75rem; color:var(--text-secondary);">Target
+                                    Safety Margin (Multiplier)</label>
+                                <span id="safetyMarginVal" style="font-weight:700; color:var(--accent);">1.2x</span>
+                            </div>
+                            <input type="range" id="safetyMarginSlider" min="1.0" max="3.0" value="1.2" step="0.1" />
+                            <small
+                                style="color: var(--text-secondary); font-size:0.76rem; display:block; margin-top:4px;">Crisis
+                                buffering multiplier applied to safety stock calculation.</small>
+                        </div>
+
+                        <div class="card-action-box"
+                            style="background:var(--border-light); padding:16px; border-radius:var(--radius-md); border:1px solid var(--border);">
+                            <h4
+                                style="font-size:0.85rem; font-weight:700; display:flex; align-items:center; gap:6px; margin-bottom:6px; color:var(--text-primary);">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)"
+                                    stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg>
+                                Crisis Prevention Mechanism
+                            </h4>
+                            <p style="font-size:0.8rem; color:var(--text-secondary); line-height:1.4;">Based on
+                                calculated Lead Time risks, applying this safety stock buffers against shipping delays &
+                                demand surges.</p>
+                        </div>
+                    </div>
+
+                    <!-- Prediction Results Card -->
+                    <div class="card predictor-result-card" style="display: flex; flex-direction: column;">
+                        <h3 class="card-title" style="color:var(--text-primary);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                                <polyline points="17 6 23 6 23 12" />
+                            </svg>
+                            AI Prediction Output
+                        </h3>
+
+                        <!-- Big Metric Card -->
+                        <div class="ai-metric-card"
+                            style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%); border: 1.5px solid var(--accent); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px; position:relative; overflow:hidden;">
+                            <div class="sparkle-decoration"
+                                style="position:absolute; right:-10px; top:-10px; opacity:0.1; color:var(--accent);">
+                                <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <span
+                                style="font-size: 0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary);">Recommended
+                                Crisis‑Safe Stock</span>
+                            <div id="aiSaferStockLabel"
+                                style="font-size: 2.2rem; font-weight:800; color:var(--text-primary); margin: 6px 0; line-height:1;">
+                                0 units</div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin:0;"
+                                id="aiStockBreakdownLabel">Base forecast: 0 + Safety buffer: 0</p>
+                        </div>
+
+                        <!-- Bar Chart Visualization -->
+                        <div class="ai-chart-widget" style="margin-bottom: 20px; flex: 1;">
+                            <span
+                                style="font-size:0.75rem; font-weight:600; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:12px;">Stock
+                                Levels Comparison</span>
+                            <!-- Mock chart using HTML SVG bars -->
+                            <div
+                                style="height: 120px; display: flex; align-items: flex-end; justify-content: space-around; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                                <!-- Bar 1: Current Stock -->
+                                <div style="display:flex; flex-direction:column; align-items:center; width:22%;">
+                                    <div id="barCurrentStock"
+                                        style="width:100%; border-radius: 4px 4px 0 0; background:#64748b; height: 10px; transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1); min-height: 4px;">
+                                    </div>
+                                    <span
+                                        style="font-size:0.7rem; color:var(--text-secondary); margin-top:6px; text-align:center;">Current
+                                        Stock</span>
+                                </div>
+                                <!-- Bar 2: Standard Safety Stock -->
+                                <div style="display:flex; flex-direction:column; align-items:center; width:22%;">
+                                    <div id="barStandardSafety"
+                                        style="width:100%; border-radius: 4px 4px 0 0; background:#f59e0b; height: 10px; transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1); min-height: 4px;">
+                                    </div>
+                                    <span
+                                        style="font-size:0.7rem; color:var(--text-secondary); margin-top:6px; text-align:center;">Standard
+                                        Safety</span>
+                                </div>
+                                <!-- Bar 3: AI Safer Stock -->
+                                <div style="display:flex; flex-direction:column; align-items:center; width:22%;">
+                                    <div id="barAiSafer"
+                                        style="width:100%; border-radius: 4px 4px 0 0; background:var(--accent-gradient); height: 10px; transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1); min-height: 4px;">
+                                    </div>
+                                    <span
+                                        style="font-size:0.7rem; font-weight:600; color:var(--text-primary); margin-top:6px; text-align:center;">AI
+                                        Crisis-Safe</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Status Panel / Action box -->
+                        <div id="aiStatusBox" class="ai-status-box"
+                            style="padding:12px 14px; border-radius:var(--radius-sm); border:1px solid #e2e8f0; font-size:0.85rem; margin-bottom: 16px;">
+                        </div>
+
+                        <!-- Apply Button -->
+                        <button class="btn btn-primary btn-full" id="applyAiSafetyStockBtn" style="margin-top:auto;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 6L9 17l-5-5" />
+                            </svg>
+                            Apply to Product Safety Stock
+                        </button>
+                        <div id="aiApplySuccess"
+                            style="color:var(--success); font-size:0.85rem; font-weight:600; text-align:center; margin-top:8px; display:none; animation:fadeIn 0.2s;">
+                            ✓ Safety stock level updated in active inventory!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== ORDER HISTORY SECTION =================== -->
+        <section class="content-section" id="sectionHistory">
+            <div class="section-header">
+                <div>
+                    <h2>Order History</h2>
+                    <p class="section-subtitle">View all completed orders</p>
+                </div>
+            </div>
+
+            <div class="empty-state" id="noHistoryState">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    opacity="0.3">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <h3>No Orders Yet</h3>
+                <p>Completed orders will appear here.</p>
+            </div>
+
+            <div id="historyTableCard" class="card" style="display:none;">
+                <div class="table-wrapper">
+                    <table class="data-table" id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Total Planned</th>
+                                <th>Total Actual</th>
+                                <th>Variance</th>
+                                <th>P/L</th>
+                                <th>Reorder Items</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== CATALOG MANAGER SECTION =================== -->
+        <section class="content-section" id="sectionCatalog">
+            <div class="section-header">
+                <div>
+                    <h2>Catalog Manager</h2>
+                    <p class="section-subtitle">Manage product master list, categories &amp; suppliers</p>
+                </div>
+            </div>
+
+            <!-- Tab navigation -->
+            <div class="catalog-tabs" id="catalogTabs">
+                <button class="catalog-tab active" data-tab="products">Products</button>
+                <button class="catalog-tab" data-tab="categories">Categories</button>
+                <button class="catalog-tab" data-tab="suppliers">Suppliers</button>
+            </div>
+
+            <!-- ---- PRODUCTS TAB ---- -->
+            <div class="catalog-panel" id="catalogProducts">
+                <div class="section-header" style="margin-top:16px;">
+                    <span id="catalogProductCount" class="catalog-count">0 products</span>
+                    <button class="btn btn-primary btn-sm" id="showAddProductForm">+ Add Product</button>
+                </div>
+
+                <div class="card" id="addProductFormCard" style="display:none; margin-bottom:20px;">
+                    <h3 class="card-title">New Product</h3>
+                    <form id="catalogProductForm" autocomplete="off">
+                        <div class="form-row">
+                            <div class="form-group fg-wide"><label>Product Name</label><input type="text" id="cpName"
+                                    placeholder="e.g. Steel Rod" required></div>
+                            <div class="form-group"><label>Category</label>
+                                <select id="cpCategory">
+                                    <option value="">— None —</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>Supplier</label>
+                                <select id="cpSupplier">
+                                    <option value="">— None —</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Current Stock</label><input type="number" id="cpStock"
+                                    placeholder="0" min="0" step="any"></div>
+                            <div class="form-group"><label>Min Stock</label><input type="number" id="cpMinStock"
+                                    placeholder="0" min="0" step="any"></div>
+                            <div class="form-group"><label>Safety Stock</label><input type="number" id="cpSafetyStock"
+                                    placeholder="0" min="0" step="any"></div>
+                            <div class="form-group"><label>Daily Consumption</label><input type="number"
+                                    id="cpDailyCons" placeholder="0" min="0" step="any"></div>
+                            <div class="form-group"><label>Lead Time (days)</label><input type="number" id="cpLeadTime"
+                                    placeholder="0" min="0" step="any"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Planned Rate (₹)</label><input type="number"
+                                    id="cpPlannedRate" placeholder="0.00" min="0" step="any"></div>
+                            <div class="form-group"><label>Actual Rate (₹)</label><input type="number" id="cpActualRate"
+                                    placeholder="0.00" min="0" step="any"></div>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <button type="submit" class="btn btn-primary">Save Product</button>
+                            <button type="button" class="btn btn-outline" id="cancelAddProduct">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="table-wrapper">
+                        <table class="data-table" id="catalogProductTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Supplier</th>
+                                    <th>Stock</th>
+                                    <th>Min Stock</th>
+                                    <th>Safety Stock</th>
+                                    <th>Reorder Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="catalogProductBody">
+                                <tr>
+                                    <td colspan="8" style="text-align:center;opacity:0.5;">Loading…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- CATEGORIES TAB ---- -->
+            <div class="catalog-panel" id="catalogCategories" style="display:none;">
+                <div class="section-header" style="margin-top:16px;">
+                    <span id="catalogCategoryCount" class="catalog-count">0 categories</span>
+                    <button class="btn btn-primary btn-sm" id="showAddCategoryForm">+ Add Category</button>
+                </div>
+
+                <div class="card" id="addCategoryFormCard" style="display:none; margin-bottom:20px;">
+                    <h3 class="card-title">New Category</h3>
+                    <form id="catalogCategoryForm" autocomplete="off">
+                        <div class="form-row">
+                            <div class="form-group fg-wide"><label>Category Name</label><input type="text" id="ccName"
+                                    placeholder="e.g. Raw Materials" required></div>
+                            <div class="form-group fg-wide"><label>Description</label><input type="text" id="ccDesc"
+                                    placeholder="Optional description"></div>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <button type="submit" class="btn btn-primary">Save Category</button>
+                            <button type="button" class="btn btn-outline" id="cancelAddCategory">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="table-wrapper">
+                        <table class="data-table" id="catalogCategoryTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody id="catalogCategoryBody">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;opacity:0.5;">Loading…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- SUPPLIERS TAB ---- -->
+            <div class="catalog-panel" id="catalogSuppliers" style="display:none;">
+                <div class="section-header" style="margin-top:16px;">
+                    <span id="catalogSupplierCount" class="catalog-count">0 suppliers</span>
+                    <button class="btn btn-primary btn-sm" id="showAddSupplierForm">+ Add Supplier</button>
+                </div>
+
+                <div class="card" id="addSupplierFormCard" style="display:none; margin-bottom:20px;">
+                    <h3 class="card-title">New Supplier</h3>
+                    <form id="catalogSupplierForm" autocomplete="off">
+                        <div class="form-row">
+                            <div class="form-group fg-wide"><label>Supplier Name</label><input type="text" id="csName"
+                                    placeholder="e.g. ABC Corp" required></div>
+                            <div class="form-group"><label>Contact Person</label><input type="text" id="csContact"
+                                    placeholder="Name"></div>
+                            <div class="form-group"><label>Email</label><input type="email" id="csEmail"
+                                    placeholder="email@example.com"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Phone</label><input type="text" id="csPhone"
+                                    placeholder="+91 XXXXX XXXXX"></div>
+                            <div class="form-group fg-wide"><label>Address</label><input type="text" id="csAddress"
+                                    placeholder="Full address"></div>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <button type="submit" class="btn btn-primary">Save Supplier</button>
+                            <button type="button" class="btn btn-outline" id="cancelAddSupplier">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="table-wrapper">
+                        <table class="data-table" id="catalogSupplierTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody id="catalogSupplierBody">
+                                <tr>
+                                    <td colspan="5" style="text-align:center;opacity:0.5;">Loading…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"
+        defer></script>
+</body>
+
+</html>
