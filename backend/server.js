@@ -42,6 +42,7 @@ app.use('/api/inventory', require('./routes/inventoryRoutes'));
 app.use('/api/products', require('./routes/productsRoutes'));
 app.use('/api/categories', require('./routes/categoriesRoutes'));
 app.use('/api/suppliers', require('./routes/suppliersRoutes'));
+app.use('/api/ai', require('./routes/aiRoutes'));
 
 // 404 Route Not Found Handler
 app.use(notFoundHandler);

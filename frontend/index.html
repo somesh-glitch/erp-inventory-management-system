@@ -139,7 +139,37 @@
                     <p class="section-subtitle">Welcome back, <span id="dashGreetUser">User</span></p>
                 </div>
             </div>
+        <!-- ================= AI EXECUTIVE BRIEFING ================= -->
 
+<div class="card ai-briefing-card">
+
+    <div class="ai-header">
+
+        <div class="ai-title">
+
+            Executive AI Briefing
+
+        </div>
+
+        <button id="refreshAIBtn" class="btn btn-outline btn-sm">
+
+            Refresh
+
+        </button>
+
+    </div>
+
+    <div id="aiSummaryContent">
+
+        <div class="ai-loading">
+
+            Analyzing inventory...
+
+        </div>
+
+    </div>
+
+</div>
             <div class="dashboard-grid">
                 <!-- Widget 1: Reports Summary -->
                 <div class="dashboard-widget widget-reports">
@@ -957,11 +987,53 @@
 
     </main>
 
-    <script src="auth.js"></script>
+    
+    
+    <!-- ================= AI COPILOT ================= -->
+
+<button id="aiCopilotBtn" class="ai-copilot-btn">
+     AI Copilot
+</button>
+
+<div id="aiCopilotPanel" class="ai-copilot-panel">
+
+    <div class="ai-copilot-header">
+
+        <h3> Inventory Copilot</h3>
+
+        <button id="closeCopilot">✕</button>
+
+    </div>
+
+    <div id="copilotMessages" class="copilot-messages">
+
+        <div class="ai-message">
+            Hello! I'm your Inventory AI Copilot.
+            Ask me anything about your ERP.
+        </div>
+
+    </div>
+
+    <div class="copilot-input">
+
+        <input
+            type="text"
+            id="copilotQuestion"
+            placeholder="Ask about inventory..."
+        >
+
+        <button id="sendCopilotQuestion">
+            Send
+        </button>
+
+    </div>
+
+</div>
+</body>
+<script src="auth.js"></script>
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"
         defer></script>
-</body>
 
 </html>

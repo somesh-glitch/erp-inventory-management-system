@@ -1041,3 +1041,173 @@ function setupCatalogForms() {
         }
     });
 }
+async function loadAISummary(){
+
+    const summaryBox=document.getElementById("aiSummaryContent");
+
+    if(!summaryBox) return;
+
+    summaryBox.innerHTML="Analyzing inventory...";
+
+    try{
+
+        const response=await fetch("/api/ai/dashboard-summary");
+
+        const data=await response.json();
+
+        if(data.success){
+
+            summaryBox.innerText=data.summary;
+
+        }else{
+
+            summaryBox.innerHTML="Unable to generate AI summary.";
+
+        }
+
+    }catch(err){
+
+        summaryBox.innerHTML="AI service unavailable.";
+
+        console.error(err);
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    loadAISummary();
+
+});
+
+const refreshBtn=document.getElementById("refreshAIBtn");
+
+if(refreshBtn){
+
+    refreshBtn.addEventListener("click",loadAISummary);
+
+}
+/* ==========================================
+   AI ASSISTANT PANEL
+========================================== */
+
+const aiButton = document.getElementById("aiCopilotBtn");
+const aiPanel = document.getElementById("aiCopilotPanel");
+const closeAI = document.getElementById("closeCopilot");
+
+if (aiButton && aiPanel && closeAI) {
+
+    aiButton.addEventListener("click", () => {
+        aiPanel.style.display = "flex";
+    });
+
+    closeAI.addEventListener("click", () => {
+        aiPanel.style.display = "none";
+    });
+
+}
+
+/* ==========================================
+   AI COPILOT CHAT
+========================================== */
+
+const sendBtn = document.getElementById("sendCopilotQuestion");
+const questionInput = document.getElementById("copilotQuestion");
+const messageArea = document.getElementById("copilotMessages");
+
+async function sendQuestionToAI() {
+
+    const question = questionInput.value.trim();
+
+    if (!question) return;
+
+    // Disable send button while waiting
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Thinking...";
+
+    // Display user's message
+    messageArea.innerHTML += `
+        <div class="ai-message user-message">
+            ${question}
+        </div>
+    `;
+
+    questionInput.value = "";
+
+    // Display loading message
+    messageArea.innerHTML += `
+        <div class="ai-message" id="thinkingMessage">
+            AI Assistant is thinking...
+        </div>
+    `;
+
+    messageArea.scrollTop = messageArea.scrollHeight;
+
+    try {
+
+        const response = await fetch("/api/ai/chat", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                message: question
+            })
+
+        });
+
+        const data = await response.json();
+
+        const thinking = document.getElementById("thinkingMessage");
+        if (thinking) thinking.remove();
+
+        messageArea.innerHTML += `
+            <div class="ai-message">
+                ${data.reply || data.message}
+            </div>
+        `;
+
+    } catch (err) {
+
+        const thinking = document.getElementById("thinkingMessage");
+        if (thinking) thinking.remove();
+
+        messageArea.innerHTML += `
+            <div class="ai-message">
+                Unable to contact AI Assistant.
+            </div>
+        `;
+
+        console.error(err);
+
+    } finally {
+
+        sendBtn.disabled = false;
+        sendBtn.textContent = "Send";
+
+        messageArea.scrollTop = messageArea.scrollHeight;
+
+        questionInput.focus();
+
+    }
+
+}
+
+if (sendBtn && questionInput && messageArea) {
+
+    sendBtn.addEventListener("click", sendQuestionToAI);
+
+    questionInput.addEventListener("keypress", function (e) {
+
+        if (e.key === "Enter") {
+            e.preventDefault();
+            sendQuestionToAI();
+        }
+
+    });
+
+}
