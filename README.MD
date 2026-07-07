@@ -168,25 +168,25 @@ http://localhost:5000
 
 ## Login Page
 
-(Add Screenshot)
+![Login](screenshots/login.png)
 
 ---
 
 ## Dashboard
 
-(Add Screenshot)
+![Dashboard](screenshots/dashboard.png)
 
 ---
 
 ## Inventory Management
 
-(Add Screenshot)
+![Inventory](screenshots/inventory.png)
 
 ---
 
 ## AI Stock Predictor
 
-(Add Screenshot)
+![AI Predictor](screenshots/ai-predictor.png)
 
 ---
 
