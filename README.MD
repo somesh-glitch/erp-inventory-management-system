@@ -1,4 +1,9 @@
-# ERP Inventory Management System
+# AI-Powered ERP Inventory Management System
+
+![Node.js](https://img.shields.io/badge/Node.js-20-green)
+![MySQL](https://img.shields.io/badge/MySQL-Database-blue)
+![Gemini AI](https://img.shields.io/badge/Google-Gemini_AI-orange)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
 
 A full-stack ERP (Enterprise Resource Planning) Inventory & Procurement Management System developed using **Node.js, Express.js, MySQL, HTML, CSS, and JavaScript**.
 
@@ -44,6 +49,14 @@ This project was developed as part of my internship and demonstrates the impleme
 - MySQL Database Integration
 - Environment Variable Configuration
 - Error Handling Middleware
+
+### AI Features
+
+- Executive AI Dashboard Summary
+- AI Inventory Copilot
+- Natural language inventory queries
+- AI-powered reorder recommendations
+- Context-aware inventory analysis using Google Gemini
 
 ---
 
